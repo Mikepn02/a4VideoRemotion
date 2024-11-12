@@ -3,5 +3,6 @@
 
 import { registerRoot } from "remotion";
 import { RemotionRoot } from "./Root";
+export {A4VideoComposition} from './A4Video/A4VideoComponent';
 
 registerRoot(RemotionRoot);

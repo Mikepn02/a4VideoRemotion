@@ -6,9 +6,9 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
-import { Logo } from "./HelloWorld/Logo";
-import { Subtitle } from "./HelloWorld/Subtitle";
-import { Title } from "./HelloWorld/Title";
+import { Logo } from "./A4Video/Logo";
+import { Subtitle } from "./A4Video/Subtitle";
+import { Title } from "./A4Video/Title";
 import { z } from "zod";
 import { zColor } from "@remotion/zod-types";
 
