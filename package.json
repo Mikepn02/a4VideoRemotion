@@ -7,6 +7,11 @@
   "private": true,
   "dependencies": {
     "@remotion/cli": "4.0.229",
+    "@remotion/fonts": "^4.0.229",
+    "@remotion/google-fonts": "^4.0.229",
+    "@remotion/motion-blur": "^4.0.229",
+    "@remotion/paths": "^4.0.229",
+    "@remotion/shapes": "^4.0.229",
     "@remotion/transitions": "^4.0.229",
     "@remotion/zod-types": "4.0.229",
     "react": "18.3.1",

@@ -1,98 +1,112 @@
-import {
-    AbsoluteFill,
-    Video,
-    interpolate,
-    spring,
-    useCurrentFrame,
-    useVideoConfig,
-  } from "remotion";
-  import { z } from "zod"
-  import a4video from "../../public/assets/BBQ_converted.mp4"
-  import { wipe } from "@remotion/transitions/wipe";
-  import { fade } from "@remotion/transitions/fade";
-  
-  export const MainSchema = z.object({
-    audioVolume: z.number(),
-    music: z.string(),
-    colors: Colors,
-    fonts: Fonts,
-    background:BackgroundProps,
-    transitionDuration: z.number(),
-    scene1Duration: z.number(),
-    scene1Props: scene1Schema,
-    scene2Duration: z.number(),
-    scene2Props: scene2Schema,
-    scene3Duration: z.number(),
-    scene3Props: scene3Schema,
-    scene4Duration: z.number(),
-    scene4Props: scene4Schema,
-    scene5Duration: z.number(),
-    scene5Props: scene5Schema,
-    scene6Duration: z.number(),
-    scene6Props: scene6Schema,
-  });
-  
-  type MainProps = z.infer<typeof MainSchema>;
-  
-  
-  export const A4VideoComposition: React.FC<A4VideoCompositionProps> = ({
-    text,
-    imageSrc,
-    bgColor,
-  }) => {
-    const frame = useCurrentFrame();
-  
-    const { fps } = useVideoConfig();
-  
-    const backgroundOpacity = interpolate(frame, [0, 20], [0, 1], {
-      extrapolateRight: "clamp",
-    });
-  
-    const textScale = spring({
-      frame,
-      fps,
-      from: 0.5,
-      to: 1,
-      durationInFrames: 30,
-    });
-  
-    const imageSlide = spring({
-      frame,
-      fps,
-      from: -200,
-      to: 0,
-      durationInFrames: 45,
-    });
-  
-    return (
+// src/compositions/A4VideoComposition.tsx
+
+import { AbsoluteFill, Audio, staticFile, useVideoConfig } from "remotion";
+import { z } from "zod";
+import { getCSSVariables } from "../lib/helpers";
+import Scene1, { scene1Schema } from "./Scene1";
+import { Colors, Fonts } from "../types";
+import { BackgroundProps } from "../backgrounds";
+import { LoadFonts } from "../lib/LoadFonts";
+import { linearTiming, TransitionSeries } from "@remotion/transitions";
+import { wipe } from "@remotion/transitions/wipe";
+import { fade } from "@remotion/transitions/fade";
+import Scene2, { scene2Schema } from "./Scene2";
+import Scene3, { scene3Schema } from "./Scene3";
+import Scene4 , { scene4Schema } from "./Scene4";
+import Scene5 , { scene5Schema } from "./Scene5";
+
+export const MainSchema = z.object({
+  audioVolume: z.number(),
+  music: z.string(),
+  colors: Colors,
+  fonts: Fonts,
+  background: BackgroundProps,
+  transitionDuration: z.number(),
+  scene1Duration: z.number(),
+  scene1Props: scene1Schema,
+  scene2Props: scene2Schema,
+  scene2Duration: z.number(),
+  scene3Duration: z.number(),
+  scene3Props: scene3Schema,
+  scene4Duration: z.number(),
+  scene4Props: scene4Schema,
+  scene5Props: scene5Schema,
+  scene5Duration: z.number(),
+});
+
+type A4VideoCompositionProps = z.infer<typeof MainSchema>;
+
+export const A4VideoComposition: React.FC<A4VideoCompositionProps> = ({
+  audioVolume,
+  transitionDuration,
+  colors,
+  background,
+  fonts,
+  scene1Duration,
+  scene1Props,
+  scene2Duration,
+  scene2Props,
+  scene3Duration,
+  scene3Props,
+  scene4Duration,
+  scene4Props,
+  scene5Duration,
+  scene5Props
+}) => {
+  const { id } = useVideoConfig();
+
+  return (
+    <LoadFonts fonts={fonts}>
       <AbsoluteFill
-        style={{ backgroundColor: bgColor, opacity: backgroundOpacity }}
+        id={id}
+        style={{
+          background: "",
+          ...getCSSVariables({ colors: colors, fonts: fonts, roundness: 1 }),
+        }}
       >
-        <Video src={a4video} />
-  
-        <div
-          style={{
-            position: "absolute",
-            bottom: "10%",
-            left: "10%",
-            transform: `scale(${textScale})`,
-            color: "white",
-            fontSize: "48px",
-          }}
-        >
-          {text}
-        </div>
-  
-        <img
-          src={imageSrc}
-          style={{
-            position: "absolute",
-            top: "20%",
-            left: `${imageSlide}px`,
-            width: "200px",
-          }}
-        />
+        <Audio src={staticFile("music.mp3")} volume={audioVolume} />
+        <TransitionSeries>
+          <TransitionSeries.Sequence durationInFrames={scene1Duration}>
+            <Audio src={staticFile("VO_1.mp3")} />
+            <Scene1 {...scene1Props} background={background} />
+          </TransitionSeries.Sequence>
+          <TransitionSeries.Transition
+            presentation={wipe({ direction: "from-right" })}
+            timing={linearTiming({ durationInFrames: transitionDuration / 2 })}
+          />
+
+          <TransitionSeries.Sequence durationInFrames={scene2Duration}>
+            <Scene2 {...scene2Props} background={background} />
+          </TransitionSeries.Sequence>
+
+          <TransitionSeries.Transition
+            presentation={wipe({ direction: "from-left" })}
+            timing={linearTiming({ durationInFrames: transitionDuration / 2 })}
+          />
+
+          <TransitionSeries.Sequence durationInFrames={scene3Duration}>
+            <Scene3 {...scene3Props} background={background} />
+          </TransitionSeries.Sequence>
+          <TransitionSeries.Transition
+            presentation={wipe({ direction: "from-left" })}
+            timing={linearTiming({ durationInFrames: transitionDuration / 2 })}
+          />
+
+          <TransitionSeries.Sequence durationInFrames={scene4Duration}>
+            <Scene4 {...scene4Props} background={background} />
+          </TransitionSeries.Sequence>
+
+          <TransitionSeries.Transition
+            presentation={wipe({ direction: "from-left" })}
+            timing={linearTiming({ durationInFrames: transitionDuration / 2 })}
+          />
+
+          <TransitionSeries.Sequence durationInFrames={scene5Duration}>
+            <Scene5 {...scene5Props} background={background} />
+          </TransitionSeries.Sequence>
+        </TransitionSeries>
+        
       </AbsoluteFill>
-    );
-  };
-  
+    </LoadFonts>
+  );
+};
