@@ -31,15 +31,28 @@ const Scene2: React.FC<Scene2Props> = (props) => {
     extrapolateRight: "clamp",
   });
 
+  const slowRotation = interpolate(frame, [0, durationInFrames * 5], [0, 360], {
+    extrapolateLeft: "extend",
+    extrapolateRight: "extend",
+  });
+
   const qrCodeSpring = spring({ frame, fps, config: { damping: 10 } });
-  const titleSpring = spring({ frame: frame - 20, fps, config: { damping: 12 } });
-  const mainImgSpring = spring({ frame: frame - 40, fps, config: { damping: 12 } });
+  const titleSpring = spring({
+    frame: frame - 20,
+    fps,
+    config: { damping: 12 },
+  });
+  const mainImgSpring = spring({
+    frame: frame - 40,
+    fps,
+    config: { damping: 12 },
+  });
   const qrCodeTranslateX = interpolate(qrCodeSpring, [0, 1], [-100, 20]);
   const titleOpacity = interpolate(titleSpring, [0, 1], [0, 1]);
   const titleScale = interpolate(titleSpring, [0, 1], [0.8, 1]);
   const mainImgOpacity = interpolate(mainImgSpring, [0, 1], [0, 1]);
   const mainImgScale = interpolate(mainImgSpring, [0, 1], [0.9, 1]);
-  
+
   const mainImgRotation = interpolate(mainImgSpring, [0, 1], [0, -10], {
     easing: Easing.inOut(Easing.ease),
     extrapolateLeft: "clamp",
@@ -51,7 +64,7 @@ const Scene2: React.FC<Scene2Props> = (props) => {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
-  
+
   return (
     <AbsoluteFill style={{ backgroundColor: "#1c1c1c" }}>
       <Img
@@ -93,59 +106,59 @@ const Scene2: React.FC<Scene2Props> = (props) => {
           paddingTop: "5%",
         }}
       >
-      <div style={{ width: "100%" }}>
-        <TranslateContent
-          startFrom={70}
-          duration={30}
-          color="white"
-          direction="from-right"
-          style={{
-            width: "30%",
-            left: "30%",
-            height: 5,
-            backgroundColor: "white",
-            margin: "10px 0",
-            opacity: progress,
-            transform: `rotate(${titleRotation}deg)`, 
-          }}
-        >
-          <div />
-        </TranslateContent>
+        <div style={{ width: "100%" }}>
+          <TranslateContent
+            startFrom={70}
+            duration={30}
+            color="white"
+            direction="from-right"
+            style={{
+              width: "30%",
+              left: "30%",
+              height: 5,
+              backgroundColor: "white",
+              margin: "10px 0",
+              opacity: progress,
+              transform: `rotate(${titleRotation}deg)`,
+            }}
+          >
+            <div />
+          </TranslateContent>
 
-        <div
-          style={{
-            fontSize: "80px",
-            fontWeight: "bold",
-            textTransform: "uppercase",
-            textDecorationThickness: "2px",
-            letterSpacing: "2px",
-            width: "100%",
-            marginBottom: "20px",
-            opacity: titleOpacity,
-            transform: `scale(${titleScale}) rotate(${titleRotation}deg)`,
-          }}
-        >
-          {props.title}
+          <div
+            style={{
+              fontSize: "80px",
+              fontWeight: "bold",
+              textTransform: "uppercase",
+              textDecorationThickness: "2px",
+              letterSpacing: "2px",
+              width: "100%",
+              marginBottom: "20px",
+              opacity: titleOpacity,
+              transform: `scale(${titleScale}) rotate(${titleRotation}deg)`,
+            }}
+          >
+            {props.title}
+          </div>
+
+          <TranslateContent
+            startFrom={70}
+            duration={30}
+            color="white"
+            direction="from-left"
+            style={{
+              width: "30%",
+              left: "34%",
+              height: 5,
+              backgroundColor: "white",
+              margin: "10px 0",
+              opacity: progress,
+              transform: `rotate(${titleRotation}deg)`,
+            }}
+          >
+            <div />
+          </TranslateContent>
         </div>
-
-        <TranslateContent
-          startFrom={70}
-          duration={30}
-          color="white"
-          direction="from-right"
-          style={{
-            width: "30%",
-            left: "30%",
-            height: 5,
-            backgroundColor: "white",
-            margin: "10px 0",
-            opacity: progress,
-            transform: `rotate(${titleRotation}deg)`, 
-          }}
-        >
-          <div />
-        </TranslateContent>
-      </div>
         <Img
           src={props.mainImg}
           alt="Main Image"
@@ -155,7 +168,7 @@ const Scene2: React.FC<Scene2Props> = (props) => {
             borderRadius: "10px",
             boxShadow: "0 4px 8px rgba(0, 0, 0, 0.5)",
             opacity: mainImgOpacity,
-            transform: `scale(${mainImgScale}) rotate(${mainImgRotation}deg)`,
+            transform: `scale(${mainImgScale}) rotate(${slowRotation}deg)`,
           }}
         />
       </AbsoluteFill>

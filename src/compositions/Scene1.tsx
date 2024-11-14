@@ -69,8 +69,8 @@ const Scene: React.FC<Scene1Props> = (props) => {
         }}
       >
         <TranslateContent
-          startFrom={70}
-          duration={30}
+          startFrom={10}
+          duration={40}
           color="white"
           direction="from-bottom"
           style={{
@@ -83,13 +83,14 @@ const Scene: React.FC<Scene1Props> = (props) => {
         </TranslateContent>
 
         <TranslateContent
-          startFrom={70}
-          duration={30}
+          startFrom={10}
+          duration={40}
           color="white"
-          direction="from-right"
+          direction="from-left"
           style={{
-            left: "12%",
+            left: "16%",
             translate: "-50%",
+            width: "500px",
           }}
         >
           <div
@@ -104,8 +105,8 @@ const Scene: React.FC<Scene1Props> = (props) => {
         </TranslateContent>
 
         <TranslateContent
-          startFrom={70}
-          duration={30}
+          startFrom={10}
+          duration={40}
           color="white"
           direction="from-right"
           style={{
@@ -127,13 +128,14 @@ const Scene: React.FC<Scene1Props> = (props) => {
         </TranslateContent>
 
         <TranslateContent
-          startFrom={70}
-          duration={30}
+          startFrom={10}
+          duration={40}
           color="white"
           direction="from-right"
           style={{
-            left: "12%",
+            left: "16%",
             translate: "-50%",
+            width: "500px",
           }}
         >
           <div
@@ -147,8 +149,8 @@ const Scene: React.FC<Scene1Props> = (props) => {
         </TranslateContent>
 
         <TranslateContent
-          startFrom={70}
-          duration={30}
+          startFrom={10}
+          duration={40}
           color="white"
           direction="from-bottom"
           style={{

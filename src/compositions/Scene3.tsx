@@ -48,17 +48,23 @@ const Scene3: React.FC<scene3Props> = (props) => {
   const mainImgOpacity = interpolate(mainImgSpring, [0, 1], [0, 1]);
   const mainImgScale = interpolate(mainImgSpring, [0, 1], [0.9, 1]);
 
-  const mainImgRotation = interpolate(mainImgSpring, [0, 1], [0, 10], {
-    easing: Easing.inOut(Easing.ease),
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-  });
+  const mainImgRotation = interpolate(
+    frame,
+    [0, durationInFrames * 5],
+    [0, -360],
+    {
+      easing: Easing.inOut(Easing.ease),
+      extrapolateLeft: "extend",
+      extrapolateRight: "extend",
+    },
+  );
 
   const titleRotation = interpolate(titleSpring, [0, 1], [0, -10], {
     easing: Easing.inOut(Easing.ease),
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
+
   return (
     <AbsoluteFill style={{ backgroundColor: "#1c1c1c" }}>
       <AbsoluteFill
@@ -95,6 +101,7 @@ const Scene3: React.FC<scene3Props> = (props) => {
           position: "absolute",
           top: "20px",
           left: `${qrCodeTranslateX}px`,
+          zIndex: 2,
         }}
       >
         <Img
@@ -103,7 +110,6 @@ const Scene3: React.FC<scene3Props> = (props) => {
           style={{
             width: "300px",
             height: "300px",
-            zIndex: 1,
           }}
         />
       </div>
@@ -158,10 +164,10 @@ const Scene3: React.FC<scene3Props> = (props) => {
             startFrom={70}
             duration={30}
             color="white"
-            direction="from-right"
+            direction="from-left"
             style={{
               width: "30%",
-              left: "30%",
+              left: "34%",
               height: 5,
               backgroundColor: "white",
               margin: "10px 0",
@@ -182,7 +188,7 @@ const Scene3: React.FC<scene3Props> = (props) => {
             boxShadow: "0 4px 8px rgba(0, 0, 0, 0.5)",
             opacity: mainImgOpacity,
             transform: `scale(${mainImgScale}) rotate(${mainImgRotation}deg)`,
-            zIndex: 10,
+            zIndex: 0,
           }}
         />
       </AbsoluteFill>

@@ -31,6 +31,12 @@ const Scene4: React.FC<Scene4Props> = (props) => {
     extrapolateRight: "clamp",
   });
 
+ 
+  const slowRotation = interpolate(frame, [0, durationInFrames * 5], [0, 360], {
+    extrapolateLeft: "extend",
+    extrapolateRight: "extend",
+  });
+
   const qrCodeSpring = spring({ frame, fps, config: { damping: 10 } });
   const titleSpring = spring({
     frame: frame - 20,
@@ -47,12 +53,6 @@ const Scene4: React.FC<Scene4Props> = (props) => {
   const titleScale = interpolate(titleSpring, [0, 1], [0.8, 1]);
   const mainImgOpacity = interpolate(mainImgSpring, [0, 1], [0, 1]);
   const mainImgScale = interpolate(mainImgSpring, [0, 1], [0.9, 1]);
-
-  const mainImgRotation = interpolate(mainImgSpring, [0, 1], [0, -10], {
-    easing: Easing.inOut(Easing.ease),
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-  });
 
   const titleRotation = interpolate(titleSpring, [0, 1], [0, -10], {
     easing: Easing.inOut(Easing.ease),
@@ -158,10 +158,10 @@ const Scene4: React.FC<Scene4Props> = (props) => {
             startFrom={70}
             duration={30}
             color="white"
-            direction="from-right"
+            direction="from-left"
             style={{
               width: "30%",
-              left: "30%",
+              left: "34%",
               height: 5,
               backgroundColor: "white",
               margin: "10px 0",
@@ -181,7 +181,7 @@ const Scene4: React.FC<Scene4Props> = (props) => {
             borderRadius: "10px",
             boxShadow: "0 4px 8px rgba(0, 0, 0, 0.5)",
             opacity: mainImgOpacity,
-            transform: `scale(${mainImgScale}) rotate(${mainImgRotation}deg)`,
+            transform: `scale(${mainImgScale}) rotate(${slowRotation}deg)`,
             zIndex: 10,
           }}
         />
