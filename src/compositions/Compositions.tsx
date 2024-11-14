@@ -105,7 +105,8 @@ export const A4VideoComposition: React.FC<A4VideoCompositionProps> = ({
           />
 
           <TransitionSeries.Sequence durationInFrames={scene5Duration}>
-          <Audio src={staticFile("VO_5.mp3")} />
+            {/* <Audio src={staticFile("VO_5.mp3")} /> */}
+            <Audio src={staticFile("VO_6.mp3")} />
             <Scene5 {...scene5Props} background={background} />
           </TransitionSeries.Sequence>
         </TransitionSeries>
