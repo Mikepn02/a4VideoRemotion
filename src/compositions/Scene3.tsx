@@ -188,7 +188,7 @@ const Scene3: React.FC<scene3Props> = (props) => {
             boxShadow: "0 4px 8px rgba(0, 0, 0, 0.5)",
             opacity: mainImgOpacity,
             transform: `scale(${mainImgScale}) rotate(${mainImgRotation}deg)`,
-            zIndex: 0,
+            zIndex: 1,
           }}
         />
       </AbsoluteFill>

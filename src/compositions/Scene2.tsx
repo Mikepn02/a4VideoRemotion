@@ -67,6 +67,24 @@ const Scene2: React.FC<Scene2Props> = (props) => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: "#1c1c1c" }}>
+      <AbsoluteFill
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          zIndex: 1,
+        }}
+      >
+        <Img
+          src={props.img}
+          alt="logo"
+          style={{
+            width: "50%",
+            height: "auto",
+            opacity: 0.2,
+          }}
+        />
+      </AbsoluteFill>
       <Img
         src={props.backgroundImg}
         alt=""
@@ -136,6 +154,7 @@ const Scene2: React.FC<Scene2Props> = (props) => {
               marginBottom: "20px",
               opacity: titleOpacity,
               transform: `scale(${titleScale}) rotate(${titleRotation}deg)`,
+              fontFamily: "sans-serif",
             }}
           >
             {props.title}
@@ -169,6 +188,7 @@ const Scene2: React.FC<Scene2Props> = (props) => {
             boxShadow: "0 4px 8px rgba(0, 0, 0, 0.5)",
             opacity: mainImgOpacity,
             transform: `scale(${mainImgScale}) rotate(${slowRotation}deg)`,
+            zIndex: 1,
           }}
         />
       </AbsoluteFill>

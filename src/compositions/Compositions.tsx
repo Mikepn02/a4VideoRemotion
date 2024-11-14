@@ -12,8 +12,8 @@ import { wipe } from "@remotion/transitions/wipe";
 import { fade } from "@remotion/transitions/fade";
 import Scene2, { scene2Schema } from "./Scene2";
 import Scene3, { scene3Schema } from "./Scene3";
-import Scene4 , { scene4Schema } from "./Scene4";
-import Scene5 , { scene5Schema } from "./Scene5";
+import Scene4, { scene4Schema } from "./Scene4";
+import Scene5, { scene5Schema } from "./Scene5";
 
 export const MainSchema = z.object({
   audioVolume: z.number(),
@@ -51,7 +51,7 @@ export const A4VideoComposition: React.FC<A4VideoCompositionProps> = ({
   scene4Duration,
   scene4Props,
   scene5Duration,
-  scene5Props
+  scene5Props,
 }) => {
   const { id } = useVideoConfig();
 
@@ -76,6 +76,7 @@ export const A4VideoComposition: React.FC<A4VideoCompositionProps> = ({
           />
 
           <TransitionSeries.Sequence durationInFrames={scene2Duration}>
+            <Audio src={staticFile("VO_2.mp3")} />
             <Scene2 {...scene2Props} background={background} />
           </TransitionSeries.Sequence>
 
@@ -85,6 +86,7 @@ export const A4VideoComposition: React.FC<A4VideoCompositionProps> = ({
           />
 
           <TransitionSeries.Sequence durationInFrames={scene3Duration}>
+            <Audio src={staticFile("VO_3.mp3")} />
             <Scene3 {...scene3Props} background={background} />
           </TransitionSeries.Sequence>
           <TransitionSeries.Transition
@@ -93,6 +95,7 @@ export const A4VideoComposition: React.FC<A4VideoCompositionProps> = ({
           />
 
           <TransitionSeries.Sequence durationInFrames={scene4Duration}>
+            <Audio src={staticFile("VO_4.mp3")} />
             <Scene4 {...scene4Props} background={background} />
           </TransitionSeries.Sequence>
 
@@ -102,10 +105,10 @@ export const A4VideoComposition: React.FC<A4VideoCompositionProps> = ({
           />
 
           <TransitionSeries.Sequence durationInFrames={scene5Duration}>
+          <Audio src={staticFile("VO_5.mp3")} />
             <Scene5 {...scene5Props} background={background} />
           </TransitionSeries.Sequence>
         </TransitionSeries>
-        
       </AbsoluteFill>
     </LoadFonts>
   );
