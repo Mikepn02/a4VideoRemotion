@@ -64,7 +64,7 @@ export const RemotionRoot: React.FC = () => {
       qrCode: staticFile("QR.jpg"),
       mainImg: staticFile("perfection.jpg") 
     },
-    scene5Duration: 240,
+    scene5Duration: 245,
     scene5Props: {
       img: staticFile('Logo.jpg'),
       backgroundImg: staticFile("background.jpg"),
@@ -77,7 +77,7 @@ export const RemotionRoot: React.FC = () => {
       <Composition
         id="A4VideoComposition"
         component={A4VideoComposition}
-        durationInFrames={900} 
+        durationInFrames={920} 
         fps={30}
         width={1920}
         height={1080}

@@ -52,7 +52,7 @@ const Scene5: React.FC<Scene5Props> = (props) => {
 
   return (
     <AbsoluteFill>
-        <Background {...props.background} />
+      <Background {...props.background} />
       <Img
         src={props.backgroundImg}
         alt=""
@@ -84,15 +84,15 @@ const Scene5: React.FC<Scene5Props> = (props) => {
       </div>
 
       <AbsoluteFill
-         style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            color: "white",
-            textAlign: "center",
-            paddingTop: "5%",
-          }}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          color: "white",
+          textAlign: "center",
+          paddingTop: "5%",
+        }}
       >
         <Img
           src={props.img}
@@ -105,8 +105,18 @@ const Scene5: React.FC<Scene5Props> = (props) => {
         />
 
         {/* Title Text */}
-        <div style={{ paddingTop: "1.5rem", paddingRight: "2rem" , width: "100%"}}>
-          <TitleText text={line1Split.text} startAt={35} />
+        <div
+          style={{
+            paddingTop: "1.5rem",
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <TitleText
+            text={line1Split.text}
+            startAt={35}
+          />
         </div>
       </AbsoluteFill>
     </AbsoluteFill>
